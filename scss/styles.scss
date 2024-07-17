@@ -1,0 +1,102 @@
+//! SASS/SCSS - Preprocessor of CSS or CSS with super power
+//? 1. Variables 
+//? 2. Operator
+//? 3. Nesting 
+//? 4. Mixin 
+//? 5. Parameters
+//? 6. Map 
+//? 7. Partials //! Can Create different pages for different things, like 1 for variables, 1 for mixin's etc. Uses _ in file name so that scss can get it that this file is not to be compiled, or no need to compile it.
+
+@import "./mixin";
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 62.5%; //! i.e 10px or 1rem = 10px
+}
+
+//? Defining Variables
+$bg-color: #10ac84;
+$text-color: #222f3e;
+
+//? Map 
+$font-weights: (
+    "regular": 400,
+    "medium" : 500,
+    "bold": 700,
+    "extra-bold": 900
+);
+
+//? Function 
+@function weight($weight-name) {
+    @return map-get($font-weights, $weight-name );
+}
+
+//? Mixin 
+// @mixin flexCenter {
+//     display: flex;
+//     flex-direction: column;
+//     justify-content: center;
+//     align-items: center;
+// }
+
+// //? Here, its expecting a parameter (can also pass multiple params)
+// @mixin textProperties($letter-spacing) {
+//     color: $text-color;
+//     font-size: 2rem;
+//     letter-spacing: $letter-spacing;
+// }
+
+.main-header {
+    height: 100vh;
+    width: 100vw;
+
+    @include flexCenter;
+
+    //? Variables
+    background-color: $bg-color;
+
+    //? Nesting 
+    h1 {
+        color: $text-color;
+
+        //? Operator
+        font-size: 5rem + 5rem; //! (+ , -, *, /) 
+
+        //? Nesting 
+        &:hover {
+            color: #c8d6e5;
+        }
+
+        &::before {
+            content: '*'
+        }
+
+        &::after {
+            content: '*'
+        }
+    }
+
+    p {
+        //! Using mixin & passing an argument
+        @include textProperties(0.1rem);
+
+        //? Nesting 
+        &:hover {
+            color: #c8d6e5;
+        }
+
+        //? Map
+        font-weight: weight(extra-bold);
+
+        .main {
+            color: yellow;
+        }
+    }
+
+
+}

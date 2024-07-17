@@ -1,0 +1,13 @@
+@mixin flexCenter {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+//? Here, its expecting a parameter (can also pass multiple params)
+@mixin textProperties($letter-spacing) {
+    color: $text-color;
+    font-size: 2rem;
+    letter-spacing: $letter-spacing;
+}
